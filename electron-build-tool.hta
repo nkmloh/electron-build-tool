@@ -253,23 +253,23 @@
 							//increment app version
 							version_split = Split(app_version, ".")
 
-							version_int_first = CInt(version_split(0))
-							version_int_second = CInt(version_split(1))
-							version_int_thurd = CInt(version_split(2))
+							version_int_first_kiosk = CInt(version_split(0))
+							version_int_second_kiosk = CInt(version_split(1))
+							version_int_thurd_kiosk = CInt(version_split(2))
 
-							If version_int_thurd < 1000 THEN
-								value3 = version_int_thurd + 1
-								version_new = convertToString(version_int_first,version_int_second,value3)
+							If version_int_thurd_kiosk < 1000 THEN
+								value3 = version_int_thurd_kiosk + 1
+								version_new = convertToString(version_int_first_kiosk,version_int_second_kiosk,value3)
 							Else
-								If version_int_second < 1000 THEN
-									version_int_thurd = 0
-									value2 = version_int_second + 1
-									version_new = convertToString(version_int_first,value2,version_int_thurd)
+								If version_int_second_kiosk < 1000 THEN
+									version_int_thurd_kiosk = 0
+									value2 = version_int_second_kiosk + 1
+									version_new = convertToString(version_int_first_kiosk,value2,version_int_thurd_kiosk)
 								Else
-									If version_int_first < 1000 THEN
-										version_int_second = 0
-										value1 = version_int_first + 1
-										version_new = convertToString(value1,version_int_second,version_int_thurd)
+									If version_int_first_kiosk < 1000 THEN
+										version_int_second_kiosk = 0
+										value1 = version_int_first_kiosk + 1
+										version_new = convertToString(value1,version_int_second_kiosk,version_int_thurd_kiosk)
 									End If
 								End If
 							End If
@@ -311,7 +311,7 @@
 							split_input_version_second = CInt(split_input_version(1))
 							split_input_version_thurd = CInt(split_input_version(2))
 							
-							If ((split_input_version_thurd > version_int_thurd) AND (split_input_version_second >= version_int_second)) XOR((split_input_version_second > version_int_second) AND (split_input_version_first >= version_int_first)) XOR(split_input_version_first > version_int_first) THEN
+							If ((split_input_version_thurd > version_int_thurd_kiosk) AND (split_input_version_second >= version_int_second_kiosk)) XOR((split_input_version_second > version_int_second_kiosk) AND (split_input_version_first >= version_int_first_kiosk)) XOR(split_input_version_first > version_int_first_kiosk) THEN
 
 								//disable change version input after first build is initiated
 								document.getelementbyid("new_version_kiosk").disabled = true
@@ -320,7 +320,6 @@
 
 								//TEST AREA
 								//*************************************************************************************
-
 									package = "C:\Users\Master\Documents\APX-Kiosk-Electron\package.json"
 									name1 = "apx_kiosk_64"
 									name2 = "apx_kiosk_32"
@@ -373,10 +372,10 @@
 									//=================================================================
 
 							Else
-								MsgBox "version is NOT OK"
+								MsgBox "version is NOT OK" 
 							End If
 						Else
-							document.write "invalide version FORMAT. Corect Format: x.x.x"
+							MsgBox "invalide version FORMAT. Corect Format: x.x.x"
 						End If				
 					</SCRIPT>
 
@@ -394,7 +393,7 @@
 							split_input_version_second = CInt(split_input_version(1))
 							split_input_version_thurd = CInt(split_input_version(2))
 							
-							If ((split_input_version_thurd > version_int_thurd) AND (split_input_version_second >= version_int_second)) XOR((split_input_version_second > version_int_second) AND (split_input_version_first >= version_int_first)) XOR(split_input_version_first > version_int_first) THEN
+							If ((split_input_version_thurd > version_int_thurd_kiosk) AND (split_input_version_second >= version_int_second_kiosk)) XOR((split_input_version_second > version_int_second_kiosk) AND (split_input_version_first >= version_int_first_kiosk)) XOR(split_input_version_first > version_int_first_kiosk) THEN
 
 								//disable change version input after first build is initiated
 								document.getelementbyid("new_version_kiosk").disabled = true
@@ -457,7 +456,7 @@
 								MsgBox "version is NOT OK"
 							End If
 						Else
-							document.write "invalide version FORMAT. Corect Format: x.x.x",0,true
+							MsgBox "invalide version FORMAT. Corect Format: x.x.x"
 						End If
 					</SCRIPT>
 				</FORM>
@@ -481,9 +480,7 @@
 					</div>
 					<SCRIPT LANGUAGE="VBScript">
 							// get version from application
-							// const ForReading = 1
 							Set objFSO = CreateObject("Scripting.FileSystemObject")
-							// Set objFile = objFSO.OpenTextFile("C:\Users\Master\Desktop\test\package.json", ForReading)
 							Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\package.json", 1)
 							For i = 1 to 2
 							    objFile.readLine
@@ -492,7 +489,6 @@
 
 							splitLines = Split(strLineAdmin, " ")
 							splitLinesG = splitLines(3)
-							// app_version = Mid(splitLinesG, 2, 5)
 							front_char_remove = Mid(splitLinesG, 2)
 							app_version = Left(front_char_remove,Len(front_char_remove)-2)
 							objFile.Close
@@ -501,23 +497,23 @@
 							//increment app version
 							version_split = Split(app_version, ".")
 
-							version_int_first = CInt(version_split(0))
-							version_int_second = CInt(version_split(1))
-							version_int_thurd = CInt(version_split(2))
+							version_int_first_admin = CInt(version_split(0))
+							version_int_second_admin = CInt(version_split(1))
+							version_int_thurd_admin = CInt(version_split(2))
 
-							If version_int_thurd < 1000 THEN
-								value3 = version_int_thurd + 1
-								version_new = convertToString(version_int_first,version_int_second,value3)
+							If version_int_thurd_admin < 1000 THEN
+								value3 = version_int_thurd_admin + 1
+								version_new = convertToString(version_int_first_admin,version_int_second_admin,value3)
 							Else
-								If version_int_second < 1000 THEN
-									version_int_thurd = 0
-									value2 = version_int_second + 1
-									version_new = convertToString(version_int_first,value2,version_int_thurd)
+								If version_int_second_admin < 1000 THEN
+									version_int_thurd_admin = 0
+									value2 = version_int_second_admin + 1
+									version_new = convertToString(version_int_first_admin,value2,version_int_thurd_admin)
 								Else
-									If version_int_first < 1000 THEN
-										version_int_second = 0
-										value1 = version_int_first + 1
-										version_new = convertToString(value1,version_int_second,version_int_thurd)
+									If version_int_first_admin < 1000 THEN
+										version_int_second_admin = 0
+										value1 = version_int_first_admin + 1
+										version_new = convertToString(value1,version_int_second_admin,version_int_thurd_admin)
 									End If
 								End If
 							End If
@@ -558,7 +554,7 @@
 							split_input_version_second = CInt(split_input_version(1))
 							split_input_version_thurd = CInt(split_input_version(2))
 							
-							If ((split_input_version_thurd > version_int_thurd) AND (split_input_version_second >= version_int_second)) XOR((split_input_version_second > version_int_second) AND (split_input_version_first >= version_int_first)) XOR(split_input_version_first > version_int_first) THEN
+							If ((split_input_version_thurd > version_int_thurd_admin) AND (split_input_version_second >= version_int_second_admin)) XOR((split_input_version_second > version_int_second_admin) AND (split_input_version_first >= version_int_first_admin)) XOR(split_input_version_first > version_int_first_admin) THEN
 
 								//disable change version input after first build is initiated
 								document.getelementbyid("new_version_admin").disabled = true
@@ -623,7 +619,7 @@
 								MsgBox "version is NOT OK"
 							End If
 						Else
-							document.write "invalide version FORMAT. Corect Format: x.x.x"
+							MsgBox "invalide version FORMAT. Corect Format: x.x.x"
 						End If				
 					</SCRIPT>
 
@@ -641,7 +637,7 @@
 							split_input_version_second = CInt(split_input_version(1))
 							split_input_version_thurd = CInt(split_input_version(2))
 							
-							If ((split_input_version_thurd > version_int_thurd) AND (split_input_version_second >= version_int_second)) XOR((split_input_version_second > version_int_second) AND (split_input_version_first >= version_int_first)) XOR(split_input_version_first > version_int_first) THEN
+							If ((split_input_version_thurd > version_int_thurd_admin) AND (split_input_version_second >= version_int_second_admin)) XOR((split_input_version_second > version_int_second_admin) AND (split_input_version_first >= version_int_first_admin)) XOR(split_input_version_first > version_int_first_admin) THEN
 
 								//disable change version input after first build is initiated
 								document.getelementbyid("new_version_admin").disabled = true
@@ -705,7 +701,7 @@
 								MsgBox "version is NOT OK"
 							End If
 						Else
-							document.write "invalide version FORMAT. Corect Format: x.x.x",0,true
+							MsgBox "invalide version FORMAT. Corect Format: x.x.x"
 						End If
 					</SCRIPT>
 				</FORM>
@@ -748,23 +744,23 @@
 							//increment app version
 							version_split = Split(app_version, ".")
 
-							version_int_first = CInt(version_split(0))
-							version_int_second = CInt(version_split(1))
-							version_int_thurd = CInt(version_split(2))
+							version_int_first_office = CInt(version_split(0))
+							version_int_second_office = CInt(version_split(1))
+							version_int_thurd_office = CInt(version_split(2))
 
-							If version_int_thurd < 1000 THEN
-								value3 = version_int_thurd + 1
-								version_new = convertToString(version_int_first,version_int_second,value3)
+							If version_int_thurd_office < 1000 THEN
+								value3 = version_int_thurd_office + 1
+								version_new = convertToString(version_int_first_office,version_int_second_office,value3)
 							Else
-								If version_int_second < 1000 THEN
-									version_int_thurd = 0
-									value2 = version_int_second + 1
-									version_new = convertToString(version_int_first,value2,version_int_thurd)
+								If version_int_second_office < 1000 THEN
+									version_int_thurd_office = 0
+									value2 = version_int_second_office + 1
+									version_new = convertToString(version_int_first_office,value2,version_int_thurd_office)
 								Else
-									If version_int_first < 1000 THEN
-										version_int_second = 0
-										value1 = version_int_first + 1
-										version_new = convertToString(value1,version_int_second,version_int_thurd)
+									If version_int_first_office < 1000 THEN
+										version_int_second_office = 0
+										value1 = version_int_first_office + 1
+										version_new = convertToString(value1,version_int_second_office,version_int_thurd_office)
 									End If
 								End If
 							End If
@@ -806,7 +802,7 @@
 							split_input_version_second = CInt(split_input_version(1))
 							split_input_version_thurd = CInt(split_input_version(2))
 							
-							If ((split_input_version_thurd > version_int_thurd) AND (split_input_version_second >= version_int_second)) XOR((split_input_version_second > version_int_second) AND (split_input_version_first >= version_int_first)) XOR(split_input_version_first > version_int_first) THEN
+							If ((split_input_version_thurd > version_int_thurd_office) AND (split_input_version_second >= version_int_second_office)) XOR((split_input_version_second > version_int_second_office) AND (split_input_version_first >= version_int_first_office)) XOR(split_input_version_first > version_int_first_office) THEN
 
 								//disable change version input after first build is initiated
 								document.getelementbyid("new_version_office").disabled = true
@@ -873,7 +869,7 @@
 								MsgBox "version is NOT OK"
 							End If
 						Else
-							document.write "invalide version FORMAT. Corect Format: x.x.x"
+							MsgBox "invalide version FORMAT. Corect Format: x.x.x"
 						End If				
 					</SCRIPT>
 
@@ -891,7 +887,7 @@
 							split_input_version_second = CInt(split_input_version(1))
 							split_input_version_thurd = CInt(split_input_version(2))
 							
-							If ((split_input_version_thurd > version_int_thurd) AND (split_input_version_second >= version_int_second)) XOR((split_input_version_second > version_int_second) AND (split_input_version_first >= version_int_first)) XOR(split_input_version_first > version_int_first) THEN
+							If ((split_input_version_thurd > version_int_thurd_office) AND (split_input_version_second >= version_int_second_office)) XOR((split_input_version_second > version_int_second_office) AND (split_input_version_first >= version_int_first_office)) XOR(split_input_version_first > version_int_first_office) THEN
 
 								//disable change version input after first build is initiated
 								document.getelementbyid("new_version_office").disabled = true
@@ -957,7 +953,7 @@
 								MsgBox "version is NOT OK"
 							End If
 						Else
-							document.write "invalide version FORMAT. Corect Format: x.x.x",0,true
+							MsgBox "invalide version FORMAT. Corect Format: x.x.x",0,true
 						End If
 					</SCRIPT>
 				</FORM>
