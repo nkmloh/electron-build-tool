@@ -145,7 +145,7 @@
 					document.getelementbyid("apx_office_32bit").disabled = false
 					document.getelementbyid("apx_office_64bit").disabled = false
 				End Function
-				//***************************************************************
+				//***************************************************************S
 
 				//convert version to string
 				Function convertToString(value1,value2,value3)
@@ -159,17 +159,6 @@
 				//change data from files in specific aplication
 				//***************************************************************
 				Function changeFiles(package, name1, name2, nameBuild1, nameBuild2, autoupdate, strLine, chrome_version, chrome, strLineChrome, split_input_version_first, split_input_version_second, split_input_version_thurd)
-					// C:\Users\Master\Documents\APX-Kiosk-Electron\package.json
-					// apx_kiosk_64
-					// apx_kiosk_32
-					// x64
-					// ia32
-					// C:\Users\Master\Documents\APX-Kiosk-Electron\autoupdate.js
-					// strLineKiosk
-					// chrome_version_kiosk
-					// C:\Users\Master\Documents\APX-Kiosk-Electron\electron-compatibility\chrome.js
-					// strLineChrome
-
 
 					//CHANGE IN PACKAGE JSON
 					//************************************************************************************************
@@ -261,15 +250,6 @@
 							objFile.Close
 							document.getelementbyid("version_kiosk").innerHTML = app_version
 
-							//convert version to string
-							// Function convertToStringKiosk(value1,value2,value3)
-							// 	val1 = CStr(value1)
-							// 	val2 = CStr(value2)
-							// 	val3 = CStr(value3)
-
-							// 	convertToStringKiosk = val1&"."&val2&"."&val3
-							// End Function
-
 							//increment app version
 							version_split = Split(app_version, ".")
 
@@ -354,59 +334,6 @@
 									call changeFiles(package,name1,name2,nameBuild1,nameBuild2,autoupdate,strLine,chrome_version,chrome,strLineChrome,split_input_version_first, split_input_version_second, split_input_version_thurd)
 								//*************************************************************************************
 
-
-								//CHANGE IN PACKAGE JSON
-								//************************************************************************************************
-									//build version
-									// version_new_input = convertToStringKiosk(split_input_version_first,split_input_version_second,split_input_version_thurd)
-									// Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\package.json", 1)
-									// 	strText = objFile.ReadAll
-									// 	objFile.Close
-
-									// 	//change from 64bit to 32bit build
-									// 	Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\package.json", 2)
-									// 	concat_string_line = "  ""version"": """ & version_new_input &""","
-									// 	strText = Replace(strText, strLineKiosk, concat_string_line)
-									// 	strText = Replace(strText, "apx_kiosk_64", "apx_kiosk_32")
-									// 	strText = Replace(strText, "x64", "ia32")
-									// 	objFile.write strText
-									// objFile.Close
-
-								//CHANGE IN AUTOUPDATE FILE
-								//************************************************************************************************
-									//Autoupdate file
-									// Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\autoupdate.js", 1)
-									// 	strText = objFile.ReadAll
-									// 	objFile.Close
-
-									// 	//change from 64 to 32 path
-									// 	Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\autoupdate.js", 2)
-									// 	strText = Replace(strText, "apx_kiosk_64", "apx_kiosk_32")
-									// 	objFile.write strText
-									// objFile.Close
-								
-								//CHANGE IN CHROME FILE
-								//************************************************************************************************
-									// chrome_version_new_input = document.getelementbyid("chrome_version_kiosk").value
-									// split_chrome_input_version = Split(chrome_version_new_input, ".")
-
-									// split_chrome_input_version_first = CInt(split_chrome_input_version(0))
-									// split_chrome_input_version_second = CInt(split_chrome_input_version(1))
-									// split_chrome_input_version_thurd = CInt(split_chrome_input_version(2))
-
-
-									// chrome_version_new_input = convertToStringKiosk(split_chrome_input_version_first,split_chrome_input_version_second,split_chrome_input_version_thurd)
-									// Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\electron-compatibility\chrome.js", 1)
-									// 	strTextChrome = objFile.ReadAll
-									// 	objFile.Close
-
-									// 	//change version
-									// 	Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\electron-compatibility\chrome.js", 2)
-									// 	chrome_concat_string_line = "				 	""version"": """ & chrome_version_new_input &""","
-									// 	strTextChrome = Replace(strTextChrome, strLineChrome, chrome_concat_string_line)
-									// 	objFile.write strTextChrome
-									// objFile.Close
-
 								//DELETE FOLDER DIST
 								//************************************************************************************************
 									//delete existing DIST build folder
@@ -444,8 +371,6 @@
 									//=================================================================
 										document.getelementbyid("kiosk_progres").style.visibility = "hidden"
 									//=================================================================
-
-
 
 							Else
 								MsgBox "version is NOT OK"
@@ -486,59 +411,7 @@
 								chrome_version = "chrome_version_kiosk"
 								chrome = "C:\Users\Master\Documents\APX-Kiosk-Electron\electron-compatibility\chrome.js"
 
-								call changeFiles(package,name1,name2,nameBuild1,nameBuild2,autoupdate,strLine,chrome_version,chrome,strLineChrome)
-
-								//CHANGE IN PACKAGE JSON
-								//************************************************************************************************
-									//build version
-									// version_new_input = convertToStringKiosk(split_input_version_first,split_input_version_second,split_input_version_thurd)
-									// Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\package.json", 1)
-									// 	strText = objFile.ReadAll
-									// 	objFile.Close
-
-									// 	//change from 32bit to 64bit build
-									// 	Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\package.json", 2)
-									// 	concat_string_line = "  ""version"": """ & version_new_input &""","
-									// 	strText = Replace(strText, strLineKiosk, concat_string_line)
-									// 	strText = Replace(strText, "apx_kiosk_32", "apx_kiosk_64")
-									// 	strText = Replace(strText, "ia32", "x64")
-									// 	objFile.write strText
-									// objFile.Close
-
-								//CHANGE IN AUTOUPDATE FILE
-								//************************************************************************************************
-									//Autoupdate file
-									// Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\autoupdate.js", 1)
-									// 	strText = objFile.ReadAll
-									// 	objFile.Close
-
-									// 	//change from 32 to 64 path
-									// 	Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\autoupdate.js", 2)
-									// 	strText = Replace(strText, "apx_kiosk_32", "apx_kiosk_64")
-									// 	objFile.write strText
-									// objFile.Close
-								
-								//CHANGE IN CHROME FILE
-								//************************************************************************************************
-									// chrome_version_new_input = document.getelementbyid("chrome_version_kiosk").value
-									// split_chrome_input_version = Split(chrome_version_new_input, ".")
-
-									// split_chrome_input_version_first = CInt(split_chrome_input_version(0))
-									// split_chrome_input_version_second = CInt(split_chrome_input_version(1))
-									// split_chrome_input_version_thurd = CInt(split_chrome_input_version(2))
-
-
-									// chrome_version_new_input = convertToStringKiosk(split_chrome_input_version_first,split_chrome_input_version_second,split_chrome_input_version_thurd)
-									// Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\electron-compatibility\chrome.js", 1)
-									// 	strTextChrome = objFile.ReadAll
-									// 	objFile.Close
-
-									// 	//change version
-									// 	Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Kiosk-Electron\electron-compatibility\chrome.js", 2)
-									// 	chrome_concat_string_line = "				 	""version"": """ & chrome_version_new_input &""","
-									// 	strTextChrome = Replace(strTextChrome, strLineChrome, chrome_concat_string_line)
-									// 	objFile.write strTextChrome
-									// objFile.Close	
+								call changeFiles(package,name1,name2,nameBuild1,nameBuild2,autoupdate,strLine,chrome_version,chrome,strLineChrome,split_input_version_first,split_input_version_second,split_input_version_thurd)
 
 								//DELETE FOLDER DIST
 								//************************************************************************************************
@@ -566,8 +439,8 @@
 										document.getelementbyid("kiosk_progres").style.visibility = "visible"
 									//==================================================================
 
-									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Kiosk-Electron & git pull origin dev & npm run build & exit", 0, true)
-									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Kiosk-Electron & git pull origin dev & npm run build", 1, true)
+									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Kiosk-Electron & git pull origin dev & npm run build & exit", 0, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Kiosk-Electron & git pull origin dev & npm run build", 1, true)
 									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Kiosk-Electron & git pull origin dev & exit", 0, true)
 									
 									//enable buttns while building
@@ -589,7 +462,7 @@
 					</SCRIPT>
 				</FORM>
 			</div>
-<!-- 			<div>
+			<div>
 				<FORM>
 					<label>APX Admin</label>
 					<div class="button">
@@ -625,15 +498,6 @@
 							objFile.Close
 							document.getelementbyid("version_admin").innerHTML = app_version
 
-							//increment version
-							Function convertToStringAdmin(value1,value2,value3)
-								val1 = CStr(value1)
-								val2 = CStr(value2)
-								val3 = CStr(value3)
-
-								convertToStringAdmin = val1&"."&val2&"."&val3
-							End Function
-
 							//increment app version
 							version_split = Split(app_version, ".")
 
@@ -643,17 +507,17 @@
 
 							If version_int_thurd < 1000 THEN
 								value3 = version_int_thurd + 1
-								version_new = convertToStringAdmin(version_int_first,version_int_second,value3)
+								version_new = convertToString(version_int_first,version_int_second,value3)
 							Else
 								If version_int_second < 1000 THEN
 									version_int_thurd = 0
 									value2 = version_int_second + 1
-									version_new = convertToStringAdmin(version_int_first,value2,version_int_thurd)
+									version_new = convertToString(version_int_first,value2,version_int_thurd)
 								Else
 									If version_int_first < 1000 THEN
 										version_int_second = 0
 										value1 = version_int_first + 1
-										version_new = convertToStringAdmin(value1,version_int_second,version_int_thurd)
+										version_new = convertToString(value1,version_int_second,version_int_thurd)
 									End If
 								End If
 							End If
@@ -703,61 +567,19 @@
 
 								//TEST AREA
 								//*************************************************************************************
-								
+									package = "C:\Users\Master\Documents\APX-Admin-Electron\package.json"
+									name1 = "apx_admin_64"
+									name2 = "apx_admin_32"
+									nameBuild1 = "x64"
+									nameBuild2 = "ia32"
+									autoupdate = "C:\Users\Master\Documents\APX-Admin-Electron\autoupdate.js"
+									strLine = strLineAdmin
+									chrome_version = "chrome_version_admin"
+									chrome = "C:\Users\Master\Documents\APX-Admin-Electron\electron-compatibility\chrome.js"
+
+									call changeFiles(package,name1,name2,nameBuild1,nameBuild2,autoupdate,strLine,chrome_version,chrome,strLineChrome,split_input_version_first,split_input_version_second,split_input_version_thurd)
 								//*************************************************************************************
 
-
-								//CHANGE IN PACKAGE JSON
-								//************************************************************************************************
-									//build version
-									version_new_input = convertToStringAdmin(split_input_version_first,split_input_version_second,split_input_version_thurd)
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\package.json", 1)
-										strText = objFile.ReadAll
-										objFile.Close
-
-										//change from 64bit to 32bit build
-										Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\package.json", 2)
-										concat_string_line = "  ""version"": """ & version_new_input &""","
-										strText = Replace(strText, strLineAdmin, concat_string_line)
-										strText = Replace(strText, "apx_admin_64", "apx_admin_32")
-										strText = Replace(strText, "x64", "ia32")
-										objFile.write strText
-									objFile.Close
-
-								//CHANGE IN AUTOUPDATE FILE
-								//************************************************************************************************
-									//Autoupdate file
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\autoupdate.js", 1)
-										strText = objFile.ReadAll
-										objFile.Close
-
-										//change from 64 to 32 path
-										Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\autoupdate.js", 2)
-										strText = Replace(strText, "apx_admin_64", "apx_admin_32")
-										objFile.write strText
-									objFile.Close
-								
-								//CHANGE IN CHROME FILE
-								//************************************************************************************************
-									chrome_version_new_input = document.getelementbyid("chrome_version_admin").value
-									split_chrome_input_version = Split(chrome_version_new_input, ".")
-
-									split_chrome_input_version_first = CInt(split_chrome_input_version(0))
-									split_chrome_input_version_second = CInt(split_chrome_input_version(1))
-									split_chrome_input_version_thurd = CInt(split_chrome_input_version(2))
-
-
-									chrome_version_new_input = convertToStringAdmin(split_chrome_input_version_first,split_chrome_input_version_second,split_chrome_input_version_thurd)
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\electron-compatibility\chrome.js", 1)
-										strTextChrome = objFile.ReadAll
-										objFile.Close
-
-										//change version
-										Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\electron-compatibility\chrome.js", 2)
-										chrome_concat_string_line = "				 	""version"": """ & chrome_version_new_input &""","
-										strTextChrome = Replace(strTextChrome, strLineChrome, chrome_concat_string_line)
-										objFile.write strTextChrome
-									objFile.Close
 
 								//DELETE FOLDER DIST
 								//************************************************************************************************
@@ -783,8 +605,8 @@
 										document.getelementbyid("admin_progres").style.visibility = "visible"
 									//==================================================================
 
-									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Admin-Electron & git pull origin dev & npm run build & exit", 0, true)
-									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Admin-Electron & git pull origin dev & npm run build", 1, true)
+									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Admin-Electron & git pull origin dev & npm run build & exit", 0, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Admin-Electron & git pull origin dev & npm run build", 1, true)
 									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Admin-Electron & git pull origin dev & exit", 0, true)
 									
 									//disable buttns while building
@@ -796,8 +618,6 @@
 									//=================================================================
 										document.getelementbyid("admin_progres").style.visibility = "hidden"
 									//=================================================================
-
-
 
 							Else
 								MsgBox "version is NOT OK"
@@ -828,59 +648,20 @@
 								document.getelementbyid("chrome_version_admin").disabled = true
 								//============================================================
 
-								//CHANGE IN PACKAGE JSON
-								//************************************************************************************************
-									//build version
-									version_new_input = convertToStringAdmin(split_input_version_first,split_input_version_second,split_input_version_thurd)
+								//TEST AREA
+								//*************************************************************************************
+									package = "C:\Users\Master\Documents\APX-Admin-Electron\package.json"
+									name1 = "apx_admin_32"
+									name2 = "apx_admin_64"
+									nameBuild1 = "ia32"
+									nameBuild2 = "x64"
+									autoupdate = "C:\Users\Master\Documents\APX-Admin-Electron\autoupdate.js"
+									strLine = strLineAdmin
+									chrome_version = "chrome_version_admin"
+									chrome = "C:\Users\Master\Documents\APX-Admin-Electron\electron-compatibility\chrome.js"
 
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\package.json", 1)
-										strText = objFile.ReadAll
-										objFile.Close
-
-										//change from 32bit to 64bit build
-
-										Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\package.json", 2)
-										concat_string_line = "  ""version"": """ & version_new_input &""","
-										strText = Replace(strText, strLineAdmin, concat_string_line)
-										strText = Replace(strText, "apx_admin_32", "apx_admin_64")
-										strText = Replace(strText, "ia32", "x64")
-										objFile.write strText
-									objFile.Close
-
-								//CHANGE IN AUTOUPDATE FILE
-								//************************************************************************************************
-									//Autoupdate file
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\autoupdate.js", 1)
-										strText = objFile.ReadAll
-										objFile.Close
-
-										//change from 32 to 64 path
-										Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\autoupdate.js", 2)
-										strText = Replace(strText, "apx_admin_32", "apx_admin_64")
-										objFile.write strText
-									objFile.Close
-								
-								//CHANGE IN CHROME FILE
-								//************************************************************************************************
-								chrome_version_new_input = document.getelementbyid("chrome_version_admin").value
-								split_chrome_input_version = Split(chrome_version_new_input, ".")
-
-								split_chrome_input_version_first = CInt(split_chrome_input_version(0))
-								split_chrome_input_version_second = CInt(split_chrome_input_version(1))
-								split_chrome_input_version_thurd = CInt(split_chrome_input_version(2))
-
-
-								chrome_version_new_input = convertToStringAdmin(split_chrome_input_version_first,split_chrome_input_version_second,split_chrome_input_version_thurd)
-								Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\electron-compatibility\chrome.js", 1)
-									strTextChrome = objFile.ReadAll
-									objFile.Close
-
-									//change version
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Admin-Electron\electron-compatibility\chrome.js", 2)
-									chrome_concat_string_line = "				 	""version"": """ & chrome_version_new_input &""","
-									strTextChrome = Replace(strTextChrome, strLineChrome, chrome_concat_string_line)
-									objFile.write strTextChrome
-								objFile.Close	
+									call changeFiles(package,name1,name2,nameBuild1,nameBuild2,autoupdate,strLine,chrome_version,chrome,strLineChrome,split_input_version_first,split_input_version_second,split_input_version_thurd)
+								//*************************************************************************************
 
 								//DELETE FOLDER DIST
 								//************************************************************************************************
@@ -906,8 +687,8 @@
 										document.getelementbyid("admin_progres").style.visibility = "visible"
 									//==================================================================
 
-									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Admin-Electron & git pull origin dev & npm run build & exit", 0, true)
-									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Admin-Electron & git pull origin dev & npm run build", 1, true)
+									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Admin-Electron & git pull origin dev & npm run build & exit", 0, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Admin-Electron & git pull origin dev & npm run build", 1, true)
 									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Admin-Electron & git pull origin dev & exit", 0, true)
 									
 									//enable buttns while building
@@ -964,15 +745,6 @@
 							objFile.Close
 							document.getelementbyid("version_office").innerHTML = app_version
 
-							//increment version
-							Function convertToStringOffice(value1,value2,value3)
-								val1 = CStr(value1)
-								val2 = CStr(value2)
-								val3 = CStr(value3)
-
-								convertToStringOffice = val1&"."&val2&"."&val3
-							End Function
-
 							//increment app version
 							version_split = Split(app_version, ".")
 
@@ -982,17 +754,17 @@
 
 							If version_int_thurd < 1000 THEN
 								value3 = version_int_thurd + 1
-								version_new = convertToStringOffice(version_int_first,version_int_second,value3)
+								version_new = convertToString(version_int_first,version_int_second,value3)
 							Else
 								If version_int_second < 1000 THEN
 									version_int_thurd = 0
 									value2 = version_int_second + 1
-									version_new = convertToStringOffice(version_int_first,value2,version_int_thurd)
+									version_new = convertToString(version_int_first,value2,version_int_thurd)
 								Else
 									If version_int_first < 1000 THEN
 										version_int_second = 0
 										value1 = version_int_first + 1
-										version_new = convertToStringOffice(value1,version_int_second,version_int_thurd)
+										version_new = convertToString(value1,version_int_second,version_int_thurd)
 									End If
 								End If
 							End If
@@ -1043,61 +815,18 @@
 
 								//TEST AREA
 								//*************************************************************************************
-								
+									package = "C:\Users\Master\Documents\APX-Office-Electron\package.json"
+									name1 = "apx_office_64"
+									name2 = "apx_office_32"
+									nameBuild1 = "x64"
+									nameBuild2 = "ia32"
+									autoupdate = "C:\Users\Master\Documents\APX-Office-Electron\autoupdate.js"
+									strLine = strLineOffice
+									chrome_version = "chrome_version_office"
+									chrome = "C:\Users\Master\Documents\APX-Office-Electron\electron-compatibility\chrome.js"
+
+									call changeFiles(package,name1,name2,nameBuild1,nameBuild2,autoupdate,strLine,chrome_version,chrome,strLineChrome,split_input_version_first,split_input_version_second,split_input_version_thurd)
 								//*************************************************************************************
-
-
-								//CHANGE IN PACKAGE JSON
-								//************************************************************************************************
-									//build version
-									version_new_input = convertToStringOffice(split_input_version_first,split_input_version_second,split_input_version_thurd)
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\package.json", 1)
-										strText = objFile.ReadAll
-										objFile.Close
-
-										//change from 64bit to 32bit build
-										Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\package.json", 2)
-										concat_string_line = "  ""version"": """ & version_new_input &""","
-										strText = Replace(strText, strLineOffice, concat_string_line)
-										strText = Replace(strText, "apx_office_64", "apx_office_32")
-										strText = Replace(strText, "x64", "ia32")
-										objFile.write strText
-									objFile.Close
-
-								//CHANGE IN AUTOUPDATE FILE
-								//************************************************************************************************
-									//Autoupdate file
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\autoupdate.js", 1)
-										strText = objFile.ReadAll
-										objFile.Close
-
-										//change from 64 to 32 path
-										Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\autoupdate.js", 2)
-										strText = Replace(strText, "apx_office_64", "apx_office_32")
-										objFile.write strText
-									objFile.Close
-								
-								//CHANGE IN CHROME FILE
-								//************************************************************************************************
-									chrome_version_new_input = document.getelementbyid("chrome_version_office").value
-									split_chrome_input_version = Split(chrome_version_new_input, ".")
-
-									split_chrome_input_version_first = CInt(split_chrome_input_version(0))
-									split_chrome_input_version_second = CInt(split_chrome_input_version(1))
-									split_chrome_input_version_thurd = CInt(split_chrome_input_version(2))
-
-
-									chrome_version_new_input = convertToStringOffice(split_chrome_input_version_first,split_chrome_input_version_second,split_chrome_input_version_thurd)
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\electron-compatibility\chrome.js", 1)
-										strTextChrome = objFile.ReadAll
-										objFile.Close
-
-										//change version
-										Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\electron-compatibility\chrome.js", 2)
-										chrome_concat_string_line = "				 	""version"": """ & chrome_version_new_input &""","
-										strTextChrome = Replace(strTextChrome, strLineChrome, chrome_concat_string_line)
-										objFile.write strTextChrome
-									objFile.Close
 
 								//DELETE FOLDER DIST
 								//************************************************************************************************
@@ -1124,8 +853,8 @@
 										document.getelementbyid("office_progres").style.visibility = "visible"
 									//==================================================================
 
-									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build & exit", 0, true)
-									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build", 1, true)
+									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build & exit", 0, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build", 1, true)
 									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Kiosk-Electron & git pull origin dev & exit", 0, true)
 									
 									//enable buttns while building
@@ -1169,57 +898,21 @@
 								document.getelementbyid("chrome_version_office").disabled = true
 								//============================================================
 
-								//CHANGE IN PACKAGE JSON
-								//************************************************************************************************
-									//build version
-									version_new_input = convertToStringOffice(split_input_version_first,split_input_version_second,split_input_version_thurd)
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\package.json", 1)
-										strText = objFile.ReadAll
-										objFile.Close
+								//TEST AREA
+								//*************************************************************************************
+									package = "C:\Users\Master\Documents\APX-Office-Electron\package.json"
+									name1 = "apx_office_32"
+									name2 = "apx_office_64"
+									nameBuild1 = "ia32"
+									nameBuild2 = "x64"
+									autoupdate = "C:\Users\Master\Documents\APX-Office-Electron\autoupdate.js"
+									strLine = strLineOffice
+									chrome_version = "chrome_version_office"
+									chrome = "C:\Users\Master\Documents\APX-Office-Electron\electron-compatibility\chrome.js"
 
-										//change from 32bit to 64bit build
-										Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\package.json", 2)
-										concat_string_line = "  ""version"": """ & version_new_input &""","
-										strText = Replace(strText, strLineOffice, concat_string_line)
-										strText = Replace(strText, "apx_office_32", "apx_office_64")
-										strText = Replace(strText, "ia32", "x64")
-										objFile.write strText
-									objFile.Close
+									call changeFiles(package,name1,name2,nameBuild1,nameBuild2,autoupdate,strLine,chrome_version,chrome,strLineChrome,split_input_version_first,split_input_version_second,split_input_version_thurd)
+								//*************************************************************************************
 
-								//CHANGE IN AUTOUPDATE FILE
-								//************************************************************************************************
-									//Autoupdate file
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\autoupdate.js", 1)
-										strText = objFile.ReadAll
-										objFile.Close
-
-										//change from 32 to 64 path
-										Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\autoupdate.js", 2)
-										strText = Replace(strText, "apx_office_32", "apx_office_64")
-										objFile.write strText
-									objFile.Close
-								
-								//CHANGE IN CHROME FILE
-								//************************************************************************************************
-								chrome_version_new_input = document.getelementbyid("chrome_version_office").value
-								split_chrome_input_version = Split(chrome_version_new_input, ".")
-
-								split_chrome_input_version_first = CInt(split_chrome_input_version(0))
-								split_chrome_input_version_second = CInt(split_chrome_input_version(1))
-								split_chrome_input_version_thurd = CInt(split_chrome_input_version(2))
-
-
-								chrome_version_new_input = convertToStringOffice(split_chrome_input_version_first,split_chrome_input_version_second,split_chrome_input_version_thurd)
-								Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\electron-compatibility\chrome.js", 1)
-									strTextChrome = objFile.ReadAll
-									objFile.Close
-
-									//change version
-									Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\APX-Office-Electron\electron-compatibility\chrome.js", 2)
-									chrome_concat_string_line = "				 	""version"": """ & chrome_version_new_input &""","
-									strTextChrome = Replace(strTextChrome, strLineChrome, chrome_concat_string_line)
-									objFile.write strTextChrome
-								objFile.Close	
 
 								//DELETE FOLDER DIST
 								//************************************************************************************************
@@ -1246,8 +939,8 @@
 										document.getelementbyid("office_progres").style.visibility = "visible"
 									//==================================================================
 
-									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build & exit", 0, true)
-									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build", 1, true)
+									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build & exit", 0, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build", 1, true)
 									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Kiosk-Electron & git pull origin dev & exit", 0, true)
 									
 									//enable buttns while building
@@ -1268,7 +961,7 @@
 						End If
 					</SCRIPT>
 				</FORM>
-			</div> -->
+			</div>
 			<span class="cleaner"></span>
 		</div>
 	</BODY>
