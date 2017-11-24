@@ -127,6 +127,12 @@
 					//Office
 					document.getelementbyid("apx_office_32bit").disabled = true
 					document.getelementbyid("apx_office_64bit").disabled = true
+
+					//FTP
+					//=========================================================
+						document.getelementbyid("ftp_el_camino_32bit").disabled = true
+						document.getelementbyid("ftp_el_camino_64bit").disabled = true
+
 				End Function
 				//***************************************************************
 				
@@ -144,10 +150,16 @@
 					//Office
 					document.getelementbyid("apx_office_32bit").disabled = false
 					document.getelementbyid("apx_office_64bit").disabled = false
+
+					//FTP
+					//=========================================================
+						document.getelementbyid("ftp_el_camino_32bit").disabled = false
+						document.getelementbyid("ftp_el_camino_64bit").disabled = false
+
 				End Function
-				//***************************************************************S
 
 				//convert version to string
+				//***************************************************************
 				Function convertToString(value1,value2,value3)
 					val1 = CStr(value1)
 					val2 = CStr(value2)
@@ -166,10 +178,10 @@
 						version_new_input = convertToString(split_input_version_first,split_input_version_second,split_input_version_thurd)
 						Set objFile = objFSO.OpenTextFile(package, 1)
 							strText = objFile.ReadAll
-							objFile.Close
+						objFile.Close
 
-							//change from 64bit to 32bit build
-							Set objFile = objFSO.OpenTextFile(package, 2)
+						//change from 64bit to 32bit build
+						Set objFile = objFSO.OpenTextFile(package, 2)
 							concat_string_line = "  ""version"": """ & version_new_input &""","
 							strText = Replace(strText, strLine, concat_string_line)
 							strText = Replace(strText, name1, name2)
@@ -203,17 +215,230 @@
 						chrome_version_new_input = convertToString(split_chrome_input_version_first,split_chrome_input_version_second,split_chrome_input_version_thurd)
 						Set objFile = objFSO.OpenTextFile(chrome, 1)
 							strTextChrome = objFile.ReadAll
-							objFile.Close
+						objFile.Close
 
-							//change version
-							Set objFile = objFSO.OpenTextFile(chrome, 2)
+						//change version
+						Set objFile = objFSO.OpenTextFile(chrome, 2)
 							chrome_concat_string_line = "				 	""version"": """ & chrome_version_new_input &""","
 							strTextChrome = Replace(strTextChrome, strLineChrome, chrome_concat_string_line)
 							objFile.write strTextChrome
 						objFile.Close
+				End Function
+
+				//change fast tardy pass constants
+				//***************************************************************
+				Function changeFTPConfig(FTPAddress,FTPEmployeeID,FTPPassword,FTPCode,FTPSchoolID,FTPAppType,FTPFreshCall)
+					//Read Full Document
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 1)
+							srtTextFTP = objFile.ReadAll
+						objFile.Close
+
+					//Change ADDRESS
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 1)
+							For i = 0 to 1
+							    objFile.readLine
+							Next
+							strLineFTPAddress = objFile.ReadLine
+						objFile.Close
+
+
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 2)
+							ftp_concat_string_line = "	""ADDRESS"": """ & FTPAddress &""","
+							srtTextFTP = Replace(srtTextFTP, strLineFTPAddress, ftp_concat_string_line)
+							objFile.write srtTextFTP
+						objFile.Close
+
+					//Change EMPLOYEE_ID
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 1)
+							For i = 0 to 2
+							    objFile.readLine
+							Next
+							strLineFTPEmployeeID = objFile.ReadLine
+						objFile.Close
+
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 2)
+							ftp_concat_string_line = "	""EMPLOYEE_ID"": """ & FTPEmployeeID &""","
+							srtTextFTP = Replace(srtTextFTP, strLineFTPEmployeeID, ftp_concat_string_line)
+							objFile.write srtTextFTP
+						objFile.Close
+
+					//Change PASSWORD
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 1)
+							For i = 0 to 3
+							    objFile.readLine
+							Next
+							strLineFTPPassword = objFile.ReadLine
+						objFile.Close
+
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 2)
+							ftp_concat_string_line = "	""PASSWORD"": """ & FTPPassword &""","
+							srtTextFTP = Replace(srtTextFTP, strLineFTPPassword, ftp_concat_string_line)
+							objFile.write srtTextFTP
+						objFile.Close
+
+					//Change CODE
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 1)
+							For i = 0 to 4
+							    objFile.readLine
+							Next
+							srtLineFTPCode = objFile.ReadLine
+						objFile.Close
+
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 2)
+							ftp_concat_string_line = "	""CODE"": """ & FTPCode &""","
+							srtTextFTP = Replace(srtTextFTP, srtLineFTPCode, ftp_concat_string_line)
+							objFile.write srtTextFTP
+						objFile.Close
+
+					//Change SCHOOL_ID
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 1)
+							For i = 0 to 5
+							    objFile.readLine
+							Next
+							srtLineFTPSchoolID = objFile.ReadLine
+						objFile.Close
+
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 2)
+							ftp_concat_string_line = "	""SCHOOL_ID"": """ & FTPSchoolID &""","
+							srtTextFTP = Replace(srtTextFTP, srtLineFTPSchoolID, ftp_concat_string_line)
+							objFile.write srtTextFTP
+						objFile.Close
+
+					//Change APP_TYPE
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 1)
+							For i = 0 to 6
+							    objFile.readLine
+							Next
+							srtLineFTPAppType = objFile.ReadLine
+						objFile.Close
+
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 2)
+							ftp_concat_string_line = "	""APP_TYPE"": """ & FTPAppType &""","
+							srtTextFTP = Replace(srtTextFTP, srtLineFTPAppType, ftp_concat_string_line)
+							objFile.write srtTextFTP
+						objFile.Close
+
+					//Change FRESH_CALL
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 1)
+							For i = 0 to 7
+							    objFile.readLine
+							Next
+							srtLineFTPFreshCall = objFile.ReadLine
+						objFile.Close
+
+						Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\app\js\constants.js", 2)
+							ftp_concat_string_line = "	""FRESH_CALL"": """ & FTPFreshCall &""","
+							srtTextFTP = Replace(srtTextFTP, srtLineFTPFreshCall, ftp_concat_string_line)
+							objFile.write srtTextFTP
+						objFile.Close
+				End Function
+
+				//Change Package name
+				//************************************************************************************************
+				Function changeFTPFiles(package, name1, name2, nameBuild1, nameBuild2, autoupdate, strLine, chrome_version, chrome, strLineChrome, split_input_version_first, split_input_version_second, split_input_version_thurd)
+
+					//read document
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile(package, 1)
+							srtTextFTPPackage = objFile.ReadAll
+						objFile.Close
+
+					//change name
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile(package, 1)
+							For i = 0 to 0
+							    objFile.readLine
+							Next
+							srtLineFTPname = objFile.ReadLine
+						objFile.Close
+
+						
+						Set objFile = objFSO.OpenTextFile(package, 2)
+							concat_string_line_name = "	""name"": """ & name2 &""","
+							srtTextFTPPackage = Replace(srtTextFTPPackage, srtLineFTPname, concat_string_line_name)
+							objFile.write srtTextFTPPackage
+						objFile.Close
+
+					//change version
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile(package, 1)
+							For i = 0 to 1
+							    objFile.readLine
+							Next
+							srtLineFTPversion = objFile.ReadLine
+						objFile.Close
+
+						version_new_input = convertToString(split_input_version_first,split_input_version_second,split_input_version_thurd)
+						Set objFile = objFSO.OpenTextFile(package, 2)
+							concat_string_line_version = "  ""version"": """ & version_new_input &""","
+							srtTextFTPPackage = Replace(srtTextFTPPackage, srtLineFTPversion, concat_string_line_version)
+							objFile.write srtTextFTPPackage
+						objFile.Close
+
+					//change Build bit
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile(package, 1)
+							For i = 0 to 6
+							    objFile.readLine
+							Next
+							srtLineFTPbuild = objFile.ReadLine
+						objFile.Close
+
+						changeBuildFtp = "build  --win --" & nameBuild2 &""
+						Set objFile = objFSO.OpenTextFile(package, 2)
+							concat_string_line_build = "		""build"": """ & changeBuildFtp &""","
+							srtTextFTPPackage = Replace(srtTextFTPPackage, srtLineFTPbuild, concat_string_line_build)
+							objFile.write srtTextFTPPackage
+						objFile.Close
+
+					//change Build bit
+					//************************************************************************************************
+						Set objFile = objFSO.OpenTextFile(package, 1)
+							For i = 0 to 14
+							    objFile.readLine
+							Next
+							srtLineFTPremote = objFile.ReadLine
+						objFile.Close
+
+						changeFTPpathName = "http://appupdate.schoolriver.com/uploads/" & name2 &""
+						Set objFile = objFSO.OpenTextFile(package, 2)
+							concat_string_line_remote = "		  ""remoteReleases"": """ & changeFTPpathName &"/"""
+							srtTextFTPPackage = Replace(srtTextFTPPackage, srtLineFTPremote, concat_string_line_remote)
+							objFile.write srtTextFTPPackage
+						objFile.Close
+						// MsgBox srtLineFTPremote
+
+					//CHANGE IN AUTOUPDATE FILE
+					//************************************************************************************************
+						//Autoupdate file
+						Set objFile = objFSO.OpenTextFile(autoupdate, 1)
+							strTextFTPautoupdate = objFile.ReadAll
+						objFile.Close
+
+						//change from 64 to 32 path
+						Set objFile = objFSO.OpenTextFile(autoupdate, 1)
+							For i = 0 to 12
+							    objFile.readLine
+							Next
+							srtLineFTPauto = objFile.ReadLine
+						objFile.Close
+
+						MsgBox srtLineFTPauto
+
+						// Set objFile = objFSO.OpenTextFile(autoupdate, 2)
+						// 	strTextFTPAutoupdate = Replace(strTextFTPAutoupdate, name1, name2)
+						// 	objFile.write strTextFTPAutoupdate
+						// objFile.Close	
 
 				End Function
-				//***************************************************************
 			</SCRIPT>
 			<div>
 				<FORM>
@@ -958,6 +1183,576 @@
 					</SCRIPT>
 				</FORM>
 			</div>
+			<div>
+				<FORM>
+					<label>EL CAMINO</label>
+					<div class="button">
+						<div id="ftp_el_camino_progres" style="color: black;">Building Aplication...Please what this will take couple of minutes</div>
+						<button id="ftp_el_camino_32bit" NAME="ftp_el_camino_32">32bit Build</button>
+						<button id="ftp_el_camino_64bit" NAME="ftp_el_camino_64">64bit Build</button>
+
+						<label>Current Version</label>
+						<h5 id="version_ftp_el_camino" style="color:black;"></h5>
+
+						<label>New Version</label>
+						<input id="new_version_ftp_el_camino" value="" style="color:black;" type="text"/>
+
+						<label>Chrome Version</label>
+						<input id="chrome_version_ftp_el_camino" value="" style="color:black;" type="text"/> 
+					</div>
+					<SCRIPT LANGUAGE="VBScript">
+							// get version from application
+							Set objFSO = CreateObject("Scripting.FileSystemObject")
+
+
+							Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\package.json", 1)
+								For i = 1 to 2
+								    objFile.readLine
+								Next
+								strLineFtpElCamino = objFile.ReadLine
+
+								splitLines = Split(strLineFtpElCamino, " ")
+
+								splitLinesG = splitLines(3)
+								// app_version = Mid(splitLinesG, 2, 5)
+								front_char_remove = Mid(splitLinesG, 2)
+								app_version = Left(front_char_remove,Len(front_char_remove)-2)
+							objFile.Close
+							document.getelementbyid("version_ftp_el_camino").innerHTML = app_version
+
+							//increment app version
+							version_split = Split(app_version, ".")
+
+							version_int_first_ftp_el_camino = CInt(version_split(0))
+							version_int_second_ftp_el_camino = CInt(version_split(1))
+							version_int_thurd_ftp_el_camino = CInt(version_split(2))
+
+							If version_int_thurd_ftp_el_camino < 1000 THEN
+								value3 = version_int_thurd_ftp_el_camino + 1
+								version_new = convertToString(version_int_first_ftp_el_camino,version_int_second_ftp_el_camino,value3)
+							Else
+								If version_int_second_ftp_el_camino < 1000 THEN
+									version_int_thurd_ftp_el_camino = 0
+									value2 = version_int_second_ftp_el_camino + 1
+									version_new = convertToString(version_int_first_ftp_el_camino,value2,version_int_thurd_ftp_el_camino)
+								Else
+									If version_int_first_ftp_el_camino < 1000 THEN
+										version_int_second_ftp_el_camino = 0
+										value1 = version_int_first_ftp_el_camino + 1
+										version_new = convertToString(value1,version_int_second_ftp_el_camino,version_int_thurd_ftp_el_camino)
+									End If
+								End If
+							End If
+							document.getelementbyid("new_version_ftp_el_camino").value = version_new
+
+							//Hide loader massage or whatever while building
+							//=================================================================
+								document.getelementbyid("ftp_el_camino_progres").style.visibility = "hidden"
+							//=================================================================
+
+							//Get version from Chrome file
+							Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\electron-compatibility\chrome.js", 1)
+								For i = 0 to 82
+								    objFile.readLine
+								Next
+								strLineChrome = objFile.ReadLine
+
+								splitLines = Split(strLineChrome, " ")
+
+								splitLinesG = splitLines(2)
+								front_char_remove = Mid(splitLinesG, 2)
+								chrome_version = Left(front_char_remove,Len(front_char_remove)-2)
+								document.getelementbyid("chrome_version_ftp_el_camino").value = chrome_version
+							objFile.Close
+
+					</SCRIPT>
+
+					<SCRIPT FOR="ftp_el_camino_32" EVENT="onClick" LANGUAGE="VBScript">
+						Set objFSO = CreateObject("Scripting.FileSystemObject")
+						Set WshShell = CreateObject("WScript.Shell")
+
+						// Validate	version
+						input_version_value = document.getelementbyid("new_version_ftp_el_camino").value
+						split_input_version = Split(input_version_value, ".")
+						lenght_of_split_input_version = UBound(split_input_version)
+
+						If lenght_of_split_input_version = 2 THEN
+
+							split_input_version_first = CInt(split_input_version(0))
+							split_input_version_second = CInt(split_input_version(1))
+							split_input_version_thurd = CInt(split_input_version(2))
+							
+							If ((split_input_version_thurd > version_int_thurd_ftp_el_camino) AND (split_input_version_second >= version_int_second_ftp_el_camino)) XOR((split_input_version_second > version_int_second_ftp_el_camino) AND (split_input_version_first >= version_int_first_ftp_el_camino)) XOR(split_input_version_first > version_int_first_ftp_el_camino) THEN
+
+								//disable change version input after first build is initiated
+								document.getelementbyid("new_version_ftp_el_camino").disabled = true
+								document.getelementbyid("chrome_version_ftp_el_camino").disabled = true
+
+
+								//TEST AREA
+								//*************************************************************************************
+								// "ADDRESS": "http://api.360isuite.com",
+								// "EMPLOYEE_ID": "test_check@gmail.com",
+								// "PASSWORD": "123456",
+								// "CODE": "ECR",
+								// "SCHOOL_ID": "45",
+								// "APP_TYPE": "app",
+								// "FRESH_CALL": "0",
+									FTPAddress = "http://api.360isuite.com"
+									FTPEmployeeID = "test_check@gmail.com"
+									FTPPassword = "123456"
+									FTPCode = "ECR"
+									FTPSchoolID = "45"
+									FTPAppType = "app"
+									FTPFreshCall = "0"
+
+									call changeFTPConfig(FTPAddress,FTPEmployeeID,FTPPassword,FTPCode,FTPSchoolID,FTPAppType,FTPFreshCall)
+								//*************************************************************************************
+								
+
+								// change file call
+								//*************************************************************************************
+									package = "C:\Users\Master\Documents\FastTardyPass\package.json"
+									name1 = "ftp_el_camino_64"
+									name2 = "ftp_el_camino_32"
+									nameBuild1 = "x64"
+									nameBuild2 = "ia32"
+									autoupdate = "C:\Users\Master\Documents\FastTardyPass\autoupdate.js"
+									strLine = strLineFtpElCamino
+									chrome_version = "chrome_version_ftp_el_camino"
+									chrome = "C:\Users\Master\Documents\FastTardyPass\electron-compatibility\chrome.js"
+
+									call changeFTPFiles(package,name1,name2,nameBuild1,nameBuild2,autoupdate,strLine,chrome_version,chrome,strLineChrome,split_input_version_first,split_input_version_second,split_input_version_thurd)
+
+
+								//DELETE FOLDER DIST
+								//************************************************************************************************
+									//delete existing DIST build folder
+									dir = WshShell.ExpandEnvironmentStrings("C:\Users\Master\Documents\FastTardyPass\dist")
+									If objFSO.FolderExists(dir) Then
+										blnAnswer = window.confirm("Would you like to delete the dist folder?") 
+										If blnAnswer Then 
+											objFSO.DeleteFolder dir
+										    Msgbox "dist folder deleted"
+										End If 
+									Else
+										alert("dist folder does not exist")
+									End If
+
+
+									//disable buttns while building
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+										disableButtons()
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+									//Show loader massage or whatever while building
+									//==================================================================
+										document.getelementbyid("ftp_el_camino_progres").style.visibility = "visible"
+									//==================================================================
+
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\FastTardyPass & git pull origin dev & npm run build & exit", 0, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build", 1, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Kiosk-Electron & git pull origin dev & exit", 0, true)
+									
+									//enable buttns while building
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+										enableButtons()
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+									//Hide loader massage or whatever while building
+									//=================================================================
+										document.getelementbyid("ftp_el_camino_progres").style.visibility = "hidden"
+									//=================================================================
+
+
+
+							Else
+								MsgBox "version is NOT OK"
+							End If
+						Else
+							MsgBox "invalide version FORMAT. Corect Format: x.x.x"
+						End If				
+					</SCRIPT>
+
+					<SCRIPT FOR="ftp_el_camino_64" EVENT="onClick" LANGUAGE="VBScript">
+						Set objFSO = CreateObject("Scripting.FileSystemObject")
+						Set WshShell = CreateObject("WScript.Shell")
+
+						// Validate	version
+						input_version_value = document.getelementbyid("new_version_ftp_el_camino").value
+						split_input_version = Split(input_version_value, ".")
+						lenght_of_split_input_version = UBound(split_input_version)
+
+						If lenght_of_split_input_version = 2 THEN
+							split_input_version_first = CInt(split_input_version(0))
+							split_input_version_second = CInt(split_input_version(1))
+							split_input_version_thurd = CInt(split_input_version(2))
+							
+							If ((split_input_version_thurd > version_int_thurd_ftp_el_camino) AND (split_input_version_second >= version_int_second_ftp_el_camino)) XOR((split_input_version_second > version_int_second_ftp_el_camino) AND (split_input_version_first >= version_int_first_ftp_el_camino)) XOR(split_input_version_first > version_int_first_ftp_el_camino) THEN
+
+								//disable change version input after first build is initiated
+								document.getelementbyid("new_version_ftp_el_camino").disabled = true
+								document.getelementbyid("chrome_version_ftp_el_camino").disabled = true
+								//============================================================
+
+
+								//TEST AREA
+								//*************************************************************************************
+									FTPAddress = "http://api.360isuite.com"
+									FTPEmployeeID = "test_check@gmail.com"
+									FTPPassword = "123456"
+									FTPCode = "ECR"
+									FTPSchoolID = "45"
+									FTPAppType = "app"
+									FTPFreshCall = "0"
+
+									call changeFTPConfig(FTPAddress,FTPEmployeeID,FTPPassword,FTPCode,FTPSchoolID,FTPAppType,FTPFreshCall)
+								//*************************************************************************************
+
+									package = "C:\Users\Master\Documents\FastTardyPass\package.json"
+									name1 = "ftp_el_camino_32"
+									name2 = "ftp_el_camino_64"
+									nameBuild1 = "ia32"
+									nameBuild2 = "x64"
+									autoupdate = "C:\Users\Master\Documents\FastTardyPass\autoupdate.js"
+									strLine = strLineFtpElCamino
+									chrome_version = "chrome_version_ftp_el_camino"
+									chrome = "C:\Users\Master\Documents\FastTardyPass\electron-compatibility\chrome.js"
+
+									call changeFiles(package,name1,name2,nameBuild1,nameBuild2,autoupdate,strLine,chrome_version,chrome,strLineChrome,split_input_version_first,split_input_version_second,split_input_version_thurd)
+
+								//DELETE FOLDER DIST
+								//************************************************************************************************
+									//delete existing DIST build folder
+									// dir = WshShell.ExpandEnvironmentStrings("C:\Users\Master\Desktop\test\dist")
+									dir = WshShell.ExpandEnvironmentStrings("C:\Users\Master\Documents\FastTardyPass\dist")
+									If objFSO.FolderExists(dir) Then
+										blnAnswer = window.confirm("Would you like to delete the dist folder?") 
+										If blnAnswer Then 
+											objFSO.DeleteFolder dir
+										    Msgbox "dist folder deleted"
+										End If 
+									Else
+										alert("dist folder does not exist")
+									End If
+
+									//disable buttns while building
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+										disableButtons()
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+									//Show loader massage or whatever while building
+									//==================================================================
+										document.getelementbyid("ftp_el_camino_progres").style.visibility = "visible"
+									//==================================================================
+
+									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\FastTardyPass & git pull origin dev & npm run build & exit", 0, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build", 1, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Kiosk-Electron & git pull origin dev & exit", 0, true)
+									
+									//enable buttns while building
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+										enableButtons()
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+									//Hide loader massage or whatever while building
+									//=================================================================
+										document.getelementbyid("ftp_el_camino_progres").style.visibility = "hidden"
+									//=================================================================
+
+							Else
+								MsgBox "version is NOT OK"
+							End If
+						Else
+							MsgBox "invalide version FORMAT. Corect Format: x.x.x",0,true
+						End If
+					</SCRIPT>
+				</FORM>
+			</div>
+			<!-- <div>
+				<FORM>
+					<label>POLYTECHNIC</label>
+					<div class="button">
+						<div id="ftp_polytechnic_progres" style="color: black;">Building Aplication...Please what this will take couple of minutes</div>
+						<button id="ftp_polytechnic_32bit" NAME="ftp_polytechnic_32">32bit Build</button>
+						<button id="ftp_polytechnic_64bit" NAME="ftp_polytechnic_64">64bit Build</button>
+
+						<label>Current Version</label>
+						<h5 id="version_ftp_polytechnic" style="color:black;"></h5>
+
+						<label>New Version</label>
+						<input id="new_version_ftp_polytechnic" value="" style="color:black;" type="text"/>
+
+						<label>Chrome Version</label>
+						<input id="chrome_version_ftp_polytechnic" value="" style="color:black;" type="text"/> 
+					</div>
+					<SCRIPT LANGUAGE="VBScript">
+							// get version from application
+							Set objFSO = CreateObject("Scripting.FileSystemObject")
+
+							Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\package.json", 1)
+							For i = 1 to 2
+							    objFile.readLine
+							Next
+							strLineFtpPolytechnic = objFile.ReadLine
+
+							splitLines = Split(strLineFtpPolytechnic, " ")
+							splitLinesG = splitLines(3)
+							// app_version = Mid(splitLinesG, 2, 5)
+							front_char_remove = Mid(splitLinesG, 2)
+							app_version = Left(front_char_remove,Len(front_char_remove)-2)
+							objFile.Close
+							document.getelementbyid("version_ftp_polytechnic").innerHTML = app_version
+
+							//increment app version
+							version_split = Split(app_version, ".")
+
+							version_int_first_ftp_polytechnic = CInt(version_split(0))
+							version_int_second_ftp_polytechnic = CInt(version_split(1))
+							version_int_thurd_ftp_polytechnic = CInt(version_split(2))
+
+							If version_int_thurd_ftp_polytechnic < 1000 THEN
+								value3 = version_int_thurd_ftp_polytechnic + 1
+								version_new = convertToString(version_int_first_ftp_polytechnic,version_int_second_ftp_polytechnic,value3)
+							Else
+								If version_int_second_ftp_polytechnic < 1000 THEN
+									version_int_thurd_ftp_polytechnic = 0
+									value2 = version_int_second_ftp_polytechnic + 1
+									version_new = convertToString(version_int_first_ftp_polytechnic,value2,version_int_thurd_ftp_polytechnic)
+								Else
+									If version_int_first_ftp_polytechnic < 1000 THEN
+										version_int_second_ftp_polytechnic = 0
+										value1 = version_int_first_ftp_polytechnic + 1
+										version_new = convertToString(value1,version_int_second_ftp_polytechnic,version_int_thurd_ftp_polytechnic)
+									End If
+								End If
+							End If
+							document.getelementbyid("new_version_ftp_polytechnic").value = version_new
+
+							//Hide loader massage or whatever while building
+							//=================================================================
+								document.getelementbyid("ftp_polytechnic_progres").style.visibility = "hidden"
+							//=================================================================
+
+							//Get version from Chrome file
+							Set objFile = objFSO.OpenTextFile("C:\Users\Master\Documents\FastTardyPass\electron-compatibility\chrome.js", 1)
+								For i = 0 to 82
+								    objFile.readLine
+								Next
+								strLineChrome = objFile.ReadLine
+
+								splitLines = Split(strLineChrome, " ")
+
+								splitLinesG = splitLines(2)
+								front_char_remove = Mid(splitLinesG, 2)
+								chrome_version = Left(front_char_remove,Len(front_char_remove)-2)
+								document.getelementbyid("chrome_version_ftp_polytechnic").value = chrome_version
+							objFile.Close
+
+					</SCRIPT>
+
+					<SCRIPT FOR="ftp_polytechnic_32" EVENT="onClick" LANGUAGE="VBScript">
+						Set objFSO = CreateObject("Scripting.FileSystemObject")
+						Set WshShell = CreateObject("WScript.Shell")
+
+						// Validate	version
+						input_version_value = document.getelementbyid("new_version_ftp_polytechnic").value
+						split_input_version = Split(input_version_value, ".")
+						lenght_of_split_input_version = UBound(split_input_version)
+
+						If lenght_of_split_input_version = 2 THEN
+
+							split_input_version_first = CInt(split_input_version(0))
+							split_input_version_second = CInt(split_input_version(1))
+							split_input_version_thurd = CInt(split_input_version(2))
+							
+							If ((split_input_version_thurd > version_int_thurd_ftp_polytechnic) AND (split_input_version_second >= version_int_second_ftp_polytechnic)) XOR((split_input_version_second > version_int_second_ftp_polytechnic) AND (split_input_version_first >= version_int_first_ftp_polytechnic)) XOR(split_input_version_first > version_int_first_ftp_polytechnic) THEN
+
+								//disable change version input after first build is initiated
+								document.getelementbyid("new_version_ftp_polytechnic").disabled = true
+								document.getelementbyid("chrome_version_ftp_polytechnic").disabled = true
+
+
+								//TEST AREA
+								//*************************************************************************************
+								// "ADDRESS": "http://api.360isuite.com",
+								// "EMPLOYEE_ID": "ruben@gmail.com",
+								// "PASSWORD": "a123456",
+								// "CODE": "POLYNONE",
+								// "SCHOOL_ID": "36",
+								// "APP_TYPE": "app",
+								// "FRESH_CALL": "0",
+									FTPAddress = "http://api.360isuite.com"
+									FTPEmployeeID = "ruben@gmail.com"
+									FTPPassword = "a123456"
+									FTPCode = "POLYNONE"
+									FTPSchoolID = "36"
+									FTPAppType = "app"
+									FTPFreshCall = "0"
+
+									call changeFTPConfig(FTPAddress,FTPEmployeeID,FTPPassword,FTPCode,FTPSchoolID,FTPAppType,FTPFreshCall)
+								//*************************************************************************************
+								
+
+								// change file call
+								//*************************************************************************************
+									package = "C:\Users\Master\Documents\FastTardyPass\package.json"
+									name1 = "ftp_polytechnic_64"
+									name2 = "ftp_polytechnic_32"
+									nameBuild1 = "x64"
+									nameBuild2 = "ia32"
+									autoupdate = "C:\Users\Master\Documents\FastTardyPass\autoupdate.js"
+									strLine = strLineFtpElCamino
+									chrome_version = "chrome_version_ftp_polytechnic"
+									chrome = "C:\Users\Master\Documents\FastTardyPass\electron-compatibility\chrome.js"
+
+									call changeFiles(package,name1,name2,nameBuild1,nameBuild2,autoupdate,strLine,chrome_version,chrome,strLineChrome,split_input_version_first,split_input_version_second,split_input_version_thurd)
+
+
+								//DELETE FOLDER DIST
+								//************************************************************************************************
+									//delete existing DIST build folder
+									dir = WshShell.ExpandEnvironmentStrings("C:\Users\Master\Documents\FastTardyPass\dist")
+									If objFSO.FolderExists(dir) Then
+										blnAnswer = window.confirm("Would you like to delete the dist folder?") 
+										If blnAnswer Then 
+											objFSO.DeleteFolder dir
+										    Msgbox "dist folder deleted"
+										End If 
+									Else
+										alert("dist folder does not exist")
+									End If
+
+
+									//disable buttns while building
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+										disableButtons()
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+									//Show loader massage or whatever while building
+									//==================================================================
+										document.getelementbyid("ftp_polytechnic_progres").style.visibility = "visible"
+									//==================================================================
+
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\FastTardyPass & git pull origin dev & npm run build & exit", 0, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build", 1, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Kiosk-Electron & git pull origin dev & exit", 0, true)
+									
+									//enable buttns while building
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+										enableButtons()
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+									//Hide loader massage or whatever while building
+									//=================================================================
+										document.getelementbyid("ftp_polytechnic_progres").style.visibility = "hidden"
+									//=================================================================
+
+
+
+							Else
+								MsgBox "version is NOT OK"
+							End If
+						Else
+							MsgBox "invalide version FORMAT. Corect Format: x.x.x"
+						End If				
+					</SCRIPT>
+
+					<SCRIPT FOR="ftp_polytechnic_64" EVENT="onClick" LANGUAGE="VBScript">
+						Set objFSO = CreateObject("Scripting.FileSystemObject")
+						Set WshShell = CreateObject("WScript.Shell")
+
+						// Validate	version
+						input_version_value = document.getelementbyid("new_version_ftp_polytechnic").value
+						split_input_version = Split(input_version_value, ".")
+						lenght_of_split_input_version = UBound(split_input_version)
+
+						If lenght_of_split_input_version = 2 THEN
+							split_input_version_first = CInt(split_input_version(0))
+							split_input_version_second = CInt(split_input_version(1))
+							split_input_version_thurd = CInt(split_input_version(2))
+							
+							If ((split_input_version_thurd > version_int_thurd_ftp_polytechnic) AND (split_input_version_second >= version_int_second_ftp_polytechnic)) XOR((split_input_version_second > version_int_second_ftp_polytechnic) AND (split_input_version_first >= version_int_first_ftp_polytechnic)) XOR(split_input_version_first > version_int_first_ftp_polytechnic) THEN
+
+								//disable change version input after first build is initiated
+								document.getelementbyid("new_version_ftp_polytechnic").disabled = true
+								document.getelementbyid("chrome_version_ftp_polytechnic").disabled = true
+								//============================================================
+
+
+								//TEST AREA
+								//*************************************************************************************
+									FTPAddress = "http://api.360isuite.com"
+									FTPEmployeeID = "test_check@gmail.com"
+									FTPPassword = "123456"
+									FTPCode = "ECR"
+									FTPSchoolID = "45"
+									FTPAppType = "app"
+									FTPFreshCall = "0"
+
+									call changeFTPConfig(FTPAddress,FTPEmployeeID,FTPPassword,FTPCode,FTPSchoolID,FTPAppType,FTPFreshCall)
+								//*************************************************************************************
+
+									package = "C:\Users\Master\Documents\FastTardyPass\package.json"
+									name1 = "ftp_polytechnic_32"
+									name2 = "ftp_polytechnic_64"
+									nameBuild1 = "ia32"
+									nameBuild2 = "x64"
+									autoupdate = "C:\Users\Master\Documents\FastTardyPass\autoupdate.js"
+									strLine = strLineFtpElCamino
+									chrome_version = "chrome_version_ftp_polytechnic"
+									chrome = "C:\Users\Master\Documents\FastTardyPass\electron-compatibility\chrome.js"
+
+									call changeFiles(package,name1,name2,nameBuild1,nameBuild2,autoupdate,strLine,chrome_version,chrome,strLineChrome,split_input_version_first,split_input_version_second,split_input_version_thurd)
+
+								//DELETE FOLDER DIST
+								//************************************************************************************************
+									//delete existing DIST build folder
+									// dir = WshShell.ExpandEnvironmentStrings("C:\Users\Master\Desktop\test\dist")
+									dir = WshShell.ExpandEnvironmentStrings("C:\Users\Master\Documents\FastTardyPass\dist")
+									If objFSO.FolderExists(dir) Then
+										blnAnswer = window.confirm("Would you like to delete the dist folder?") 
+										If blnAnswer Then 
+											objFSO.DeleteFolder dir
+										    Msgbox "dist folder deleted"
+										End If 
+									Else
+										alert("dist folder does not exist")
+									End If
+
+									//disable buttns while building
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+										disableButtons()
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+									//Show loader massage or whatever while building
+									//==================================================================
+										document.getelementbyid("ftp_polytechnic_progres").style.visibility = "visible"
+									//==================================================================
+
+									return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\FastTardyPass & git pull origin dev & npm run build & exit", 0, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Office-Electron & git pull origin dev & npm run build", 1, true)
+									// return = WshShell.Run("cmd /K CD C:\Users\Master\Documents\APX-Kiosk-Electron & git pull origin dev & exit", 0, true)
+									
+									//enable buttns while building
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+										enableButtons()
+									//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+
+									//Hide loader massage or whatever while building
+									//=================================================================
+										document.getelementbyid("ftp_polytechnic_progres").style.visibility = "hidden"
+									//=================================================================
+
+							Else
+								MsgBox "version is NOT OK"
+							End If
+						Else
+							MsgBox "invalide version FORMAT. Corect Format: x.x.x",0,true
+						End If
+					</SCRIPT>
+				</FORM>
+			</div> -->
 			<span class="cleaner"></span>
 		</div>
 	</BODY>
